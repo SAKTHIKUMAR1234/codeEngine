@@ -18,6 +18,6 @@ public class UserApiControllerImpl implements UserApiController {
     }
     @Override
     public ResponseEntity<?> userLogin(LoginDTO loginDTO) {
-        return null;
+        return userModelService.userLogin(loginDTO);
     }
 }
