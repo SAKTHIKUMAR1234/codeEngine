@@ -13,4 +13,7 @@ public interface UserApiController {
 
     @PostMapping("/login")
     ResponseEntity<?> userLogin(@RequestBody LoginDTO loginDTO);
+
+    @GetMapping("/getUserData")
+    ResponseEntity<?> getUserData();
 }

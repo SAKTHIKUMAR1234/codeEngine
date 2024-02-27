@@ -6,8 +6,6 @@ import com.sk.codeengine.Service.UserModelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
-
 @RestController
 @RequiredArgsConstructor
 public class UserApiControllerImpl implements UserApiController {
@@ -19,5 +17,9 @@ public class UserApiControllerImpl implements UserApiController {
     @Override
     public ResponseEntity<?> userLogin(LoginDTO loginDTO) {
         return userModelService.userLogin(loginDTO);
+    }
+    @Override
+    public ResponseEntity<?> getUserData() {
+        return userModelService.getUserData();
     }
 }

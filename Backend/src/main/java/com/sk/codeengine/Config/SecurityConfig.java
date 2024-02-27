@@ -37,8 +37,8 @@ public class SecurityConfig  {
                 .cors(cors -> cors.configurationSource(configurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/v1/auth/login").permitAll()
-                                .anyRequest().permitAll()
+                        req.requestMatchers("/codeEngine/v1/user/login","/codeEngine/v1/user/signup").permitAll()
+                                .anyRequest().authenticated()
                 )
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

@@ -10,5 +10,6 @@ import org.springframework.stereotype.Service;
 public interface UserModelService {
     ResponseEntity<?> userLogin(LoginDTO loginDTO);
     ResponseEntity<?> userSignUp(SignUpDTO signUpDTO);
+    ResponseEntity<?> getUserData();
 
 }

@@ -18,9 +18,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -63,10 +66,25 @@ public class UserModelServiceImplementation implements UserModelService {
                     .name(userModel.getName())
                     .role(userModel.getRole().name())
                     .build();
-            return responseBuilder.getResponse(userDTO, HttpStatus.CREATED, CodeEnginePhrases.userCreatedPhrase);
+            return responseBuilder.getResponse(userDTO, HttpStatus.CREATED, CodeEnginePhrases.DataCreatedPhrase);
         }catch (Exception e){
             throw new InvalidDataException(CodeEnginePhrases.InvalidFormatDataPhrase);
         }
+
+    }
+
+    @Override
+    public ResponseEntity<?> getUserData() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<UserModel> userModelOptional = userDAO.findByEmail(email);
+        if(userModelOptional.isEmpty()) throw new UsernameNotFoundException(CodeEnginePhrases.UsernameNotFoundPhrase);
+        UserModel userModel = userModelOptional.get();
+        UserDTO userDTO = UserDTO.builder()
+                .email(userModel.getEmail())
+                .name(userModel.getName())
+                .role(userModel.getRole().name())
+                .build();
+        return responseBuilder.getResponse(userDTO, HttpStatus.OK, CodeEnginePhrases.DataFetchedSuccessPhrase);
 
     }
 }

@@ -25,7 +25,7 @@ public class TestCaseModel {
     private Long id;
     private String input;
     private String output;
-    private Integer score;
+    private Double score;
     @CreatedDate
     private Timestamp createdAt;
     @LastModifiedDate

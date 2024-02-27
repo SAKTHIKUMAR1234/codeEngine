@@ -9,9 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ResponseBuilder {
-
     public ResponseEntity<?> getResponse(Object data, HttpStatus httpStatus,String message){
-
         ResponseDTO responseDTO = ResponseDTO.builder()
                 .message(message)
                 .data(data)
@@ -19,6 +17,5 @@ public class ResponseBuilder {
                 .build();
         return new ResponseEntity<>(responseDTO,httpStatus);
     }
-
 
 }

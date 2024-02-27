@@ -27,6 +27,9 @@ public class QuestionModel {
     private Long id;
     private String questionName;
     private String questionDesc;
+
+    @Column(unique = true)
+    private String questionId;
     @OneToMany
     private List<TestCaseModel> testCaseList;
     @CreatedDate
